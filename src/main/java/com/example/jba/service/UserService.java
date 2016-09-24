@@ -10,7 +10,6 @@ import com.example.jba.repository.RoleRepository;
 import com.example.jba.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -65,5 +64,10 @@ public class UserService {
         roles.add(roleRepository.findByName("ROLE_USER"));
         user.setRoles(roles);
         userRepository.save(user);
+    }
+
+    public User findOneWithBlogs(String name) {
+        User user = userRepository.findByName(name);
+        return findOneWithBlogs(user.getId());
     }
 }
